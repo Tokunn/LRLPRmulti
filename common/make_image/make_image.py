@@ -144,7 +144,7 @@ def make_license_plates(country, country_number, char, number):
 # In[ ]:
 
 
-#random.seed(1)
+random.seed(1)
 
 country_temp = [u"福島", u"会津", u"郡山", u"いわき", u"水戸", u"土浦",
                 u"つくば", u"宇都宮", u"那須", u"とちぎ", u"群馬", u"前橋", u"高崎"] * int(math.ceil(number_of_plates/10.0))
