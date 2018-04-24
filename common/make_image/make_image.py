@@ -117,7 +117,7 @@ def make_license_plates(country, country_number, char, number):
     
     if not(os.path.exists(imgdir + '{0}'.format(number[:2]+number[3:]))):
         os.mkdir(imgdir + '{0}'.format(number[:2]+number[3:]))
-    for i in range(5, 15, 4):
+    for i in range(1, 15, 4):
         #img_filed = img.filter(PIL.ImageFilter.GaussianBlur(radius=i))
         img_filed = img.resize((img.width/i, img.height/i))
         img_filed.save(imgdir + '{0}/{1}.png'.format(number[:2]+number[3:], i))
