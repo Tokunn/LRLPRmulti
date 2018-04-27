@@ -4,7 +4,9 @@ from __future__ import print_function
 
 import numpy as np
 import tensorflow as tf
-from tf.keras.preprocessing.image import load_img
+from keras.preprocessing.image import load_img
+
+import loadimg
 
 tf.logging.set_verbosity(tf.logging.INFO)
 
@@ -14,7 +16,10 @@ def cnn_model_fn(features, labels, mode):
   # Input Layer
   # Reshape X to 4-D tensor: [batch_size, width, height, channels]
   # MNIST images are 28x28 pixels, and have one color channel
-  input_layer = tf.reshape(features["x"], [-1, 28, 28, 1])
+  #input_layer = tf.reshape(features["x"], [-1, 28, 28, 1])
+  input_layer = features["x"]
+  print("#####################")
+  print(input_layer.shape)
 
   # Convolutional Layer #1
   # Computes 32 features using a 5x5 filter with ReLU activation.
@@ -103,11 +108,12 @@ def cnn_model_fn(features, labels, mode):
 
 def main(unused_argv):
   # Load training and eval data
-  mnist = tf.contrib.learn.datasets.load_dataset("mnist")
-  train_data = mnist.train.images  # Returns np.array
-  train_labels = np.asarray(mnist.train.labels, dtype=np.int32)
-  eval_data = mnist.test.images  # Returns np.array
-  eval_labels = np.asarray(mnist.test.labels, dtype=np.int32)
+  #mnist = tf.contrib.learn.datasets.load_dataset("mnist")
+  #train_data = mnist.train.images  # Returns np.array
+  #train_labels = np.asarray(mnist.train.labels, dtype=np.int32)
+  #eval_data = mnist.test.images  # Returns np.array
+  #eval_labels = np.asarray(mnist.test.labels, dtype=np.int32)
+  x_train, y_train, x_test, y_test, class_count = loadimg.loadimg()
 
   # Create the Estimator
   mnist_classifier = tf.estimator.Estimator(
@@ -121,8 +127,10 @@ def main(unused_argv):
 
   # Train the model
   train_input_fn = tf.estimator.inputs.numpy_input_fn(
-      x={"x": train_data},
-      y=train_labels,
+      #x={"x": train_data},
+      x={"x": x_train},
+      #y=train_labels,
+      y=y_train,
       batch_size=100,
       num_epochs=None,
       shuffle=True)
@@ -133,8 +141,9 @@ def main(unused_argv):
 
   # Evaluate the model and print results
   eval_input_fn = tf.estimator.inputs.numpy_input_fn(
-      x={"x": eval_data},
-      y=eval_labels,
+      #x={"x": eval_data},
+      x={"x": x_test},
+      y=y_test,
       num_epochs=1,
       shuffle=False)
   eval_results = mnist_classifier.evaluate(input_fn=eval_input_fn)

@@ -11,6 +11,9 @@ COMMONDIR = '../common/make_image'
 TRAINDIR = os.path.join(COMMONDIR, 'train')
 TESTDIR = os.path.join(COMMONDIR, 'test')
 
+IMGSIZE = 64
+IMGSIZE = 28
+
 def loadimg_one(DIRPATH):
     x = []
     y = []
@@ -20,7 +23,7 @@ def loadimg_one(DIRPATH):
     for number in img_list:
         dirpath = os.path.join(DIRPATH, number)
         for picture in list_pictures(dirpath):
-            img = img_to_array(load_img(picture, target_size=(64, 64)))
+            img = img_to_array(load_img(picture, target_size=(IMGSIZE, IMGSIZE)))
             x.append(img)
             y.append(img_count)
             #print("Load {0} : {1}".format(picture, img_count))
@@ -30,7 +33,7 @@ def loadimg_one(DIRPATH):
     x = np.asarray(x)
     x = x.astype('float32')
     x = x/255.0
-    y = np.asarray(y)
+    y = np.asarray(y, dtype=np.int32)
     #y = np_utils.to_categorical(y, output_count)
 
     return x, y, output_count
