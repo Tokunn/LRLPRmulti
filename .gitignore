@@ -117,3 +117,5 @@ weight/
 #ipynb
 .ipynb_checkpoints/
 *.pyc
+
+*.gz
