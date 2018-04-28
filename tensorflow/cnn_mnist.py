@@ -4,8 +4,9 @@ from __future__ import print_function
 
 import numpy as np
 import tensorflow as tf
-from keras.preprocessing.image import load_img
+from keras.preprocessing.image import load_img, img_to_array
 
+import matplotlib.pyplot as plt
 import loadimg
 
 tf.logging.set_verbosity(tf.logging.INFO)
@@ -18,8 +19,6 @@ def cnn_model_fn(features, labels, mode):
   # MNIST images are 28x28 pixels, and have one color channel
   #input_layer = tf.reshape(features["x"], [-1, 28, 28, 1])
   input_layer = features["x"]
-  print("#####################")
-  print(input_layer.shape)
 
   # Convolutional Layer #1
   # Computes 32 features using a 5x5 filter with ReLU activation.

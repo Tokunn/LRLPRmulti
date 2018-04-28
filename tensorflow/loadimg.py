@@ -40,13 +40,15 @@ def loadimg_one(DIRPATH):
 
 
 def loadimg():
+    print("########## loadimg ########")
+
     x_train, y_train, class_count = loadimg_one(TRAINDIR)
     x_test,  y_test,  _  = loadimg_one(TESTDIR)
-    print(x_test.shape)
     #for i in range(0, x_test.shape[0]):
     #    plt.imshow(x_test[i])
     #    plt.show()
 
+    print("########## END of loadimg ########")
     return x_train,  y_train, x_test, y_test, class_count
 
 if __name__ == '__main__':
