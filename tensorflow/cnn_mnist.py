@@ -130,8 +130,8 @@ def main(unused_argv):
       x={"x": x_train},
       #y=train_labels,
       y=y_train,
-      batch_size=100,
-      num_epochs=None,
+      #batch_size=1,
+      num_epochs=100,
       shuffle=True)
   mnist_classifier.train(
       input_fn=train_input_fn,
