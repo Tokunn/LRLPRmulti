@@ -63,7 +63,7 @@ for n in range(20):
 
     #i = chainer.iterators.SerialIterator(test, batchsize).next()
     #x, t = conv(i, batchsize)
-    x = Variable(x_train)
-    y = Variable(y_train)
+    x = Variable(x_test)
+    t = Variable(y_test)
     loss = model(x, t)
     print n, loss.data
