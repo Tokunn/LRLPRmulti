@@ -135,7 +135,8 @@ def make_license_plates(country, country_number, char, number):
                                              batch_size=1,
                                              save_to_dir=imgdir + '{0}'.format(number[:2]+number[3:]),
                                              save_prefix='extend_{0}'.format(i), save_format='png')
-        for j in range(2):
+        for j in range(30):
+        #for j in range(2):
             #plt.imshow(array_to_img(train_generator.next()[0]))
             #plt.show()
             train_generator.next()

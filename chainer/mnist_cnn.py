@@ -8,7 +8,7 @@ from chainer import Variable, optimizers, Chain
 
 import loadimg
 
-train, test = chainer.datasets.get_mnist(ndim=3)
+#train, test = chainer.datasets.get_mnist(ndim=3)
 x_train, y_train, x_test, y_test, class_count = loadimg.loadimg()
 
 class Model(Chain):
@@ -17,7 +17,7 @@ class Model(Chain):
                 conv1 = L.Convolution2D(3, 20, 5),
                 conv2 = L.Convolution2D(20, 50, 5),
                 fc1 = L.Linear(800, 500),
-                fc2 = L.Linear(500, 10),
+                fc2 = L.Linear(500, class_count),
         )
     def __call__(self, x):
         cv1 = self.conv1(x)
@@ -53,7 +53,7 @@ for n in range(20):
     #    optimizer.update()
 
     for i in range(20):
-        print("Loop %d" % i)
+        #print("Loop %d" % i)
         x = Variable(x_train)
         t = Variable(y_train)
         model.zerograds()
