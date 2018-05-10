@@ -24,7 +24,7 @@ def loadimg_one(DIRPATH):
         dirpath = os.path.join(DIRPATH, number)
         for picture in list_pictures(dirpath):
             img = img_to_array(load_img(picture, target_size=(IMGSIZE, IMGSIZE)))
-            x.append(np.asarray(img).transpose((2, 1, 0)))
+            x.append(img)
             y.append(img_count)
             #print("Load {0} : {1}".format(picture, img_count))
         img_count += 1
@@ -34,6 +34,7 @@ def loadimg_one(DIRPATH):
     x = x.astype('float32')
     x = x/255.0
     y = np.asarray(y, dtype=np.int32)
+    y = np_utils.to_categorical(y, output_count)
     #y = np_utils.to_categorical(y, output_count)
 
     return x, y, output_count
