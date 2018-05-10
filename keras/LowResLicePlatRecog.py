@@ -19,6 +19,8 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import datetime, time, os
 
+import sys
+sys.path.append('../common/loadimg/')
 import loadimg
 
 
@@ -60,14 +62,16 @@ import loadimg
 #x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.33)
 
 x_train, y_train, x_test, y_test, class_count = loadimg.loadimg()
+y_train = np_utils.to_categorical(y_train, class_count)
+y_test = np_utils.to_categorical(y_test, class_count)
 
 # In[ ]:
 
 
 c = x_train.shape[0]
-for i in range(0, c, 1000):
-    plt.imshow(x_train[i])
-    plt.show()
+#for i in range(0, c, 1000):
+    #plt.imshow(x_train[i])
+    #plt.show()
 
 
 # In[ ]:

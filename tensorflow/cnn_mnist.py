@@ -7,6 +7,9 @@ import tensorflow as tf
 from keras.preprocessing.image import load_img, img_to_array
 
 import matplotlib.pyplot as plt
+
+import sys
+sys.path.append('../common/loadimg/')
 import loadimg
 
 tf.logging.set_verbosity(tf.logging.INFO)
