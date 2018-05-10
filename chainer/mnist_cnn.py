@@ -6,10 +6,22 @@ import chainer.functions as F
 import chainer.links as L
 from chainer import Variable, optimizers, Chain
 
+import sys
+sys.path.append('../common/loadimg/')
 import loadimg
+
+def convorder(x):
+    x_tmp = []
+    for i in range(x.shape[0]):
+        x_tmp.append(x[i].transpose((2, 1, 0)))
+    x = np.asarray(x_tmp)
+    return x
+
 
 #train, test = chainer.datasets.get_mnist(ndim=3)
 x_train, y_train, x_test, y_test, class_count = loadimg.loadimg()
+x_train = convorder(x_train)
+x_test = convorder(x_test)
 
 class Model(Chain):
     def __init__(self):
