@@ -8,7 +8,7 @@ from keras.preprocessing.image import load_img, img_to_array
 
 import matplotlib.pyplot as plt
 
-import sys
+import sys,time
 sys.path.append('../common/loadimg/')
 import loadimg
 
@@ -109,6 +109,7 @@ def cnn_model_fn(features, labels, mode):
 
 
 def main(unused_argv):
+  starttime = time.time()
   # Load training and eval data
   #mnist = tf.contrib.learn.datasets.load_dataset("mnist")
   #train_data = mnist.train.images  # Returns np.array
@@ -134,7 +135,7 @@ def main(unused_argv):
       #y=train_labels,
       y=y_train,
       #batch_size=1,
-      num_epochs=100,
+      num_epochs=400,
       shuffle=True)
   mnist_classifier.train(
       input_fn=train_input_fn,
@@ -150,6 +151,7 @@ def main(unused_argv):
       shuffle=False)
   eval_results = mnist_classifier.evaluate(input_fn=eval_input_fn)
   print(eval_results)
+  print(time.time() - starttime)
 
 
 if __name__ == "__main__":

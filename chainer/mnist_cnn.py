@@ -6,7 +6,7 @@ import chainer.functions as F
 import chainer.links as L
 from chainer import Variable, optimizers, Chain
 
-import sys
+import sys, time
 sys.path.append('../common/loadimg/')
 import loadimg
 
@@ -55,7 +55,8 @@ def conv(batch, batchsize):
         t.append(batch[j][1])
     return Variable(np.array(x)), Variable(np.array(t))
 
-for n in range(20):
+starttime = time.time()
+for n in range(400):
     #for i in chainer.iterators.SerialIterator(train, batchsize, repeat=False):
     #    x, t = conv(i, batchsize)
 
@@ -64,14 +65,12 @@ for n in range(20):
     #    loss.backward()
     #    optimizer.update()
 
-    for i in range(20):
-        #print("Loop %d" % i)
-        x = Variable(x_train)
-        t = Variable(y_train)
-        model.zerograds()
-        loss = model(x, t)
-        loss.backward()
-        optimizer.update()
+    x = Variable(x_train)
+    t = Variable(y_train)
+    model.zerograds()
+    loss = model(x, t)
+    loss.backward()
+    optimizer.update()
 
     #i = chainer.iterators.SerialIterator(test, batchsize).next()
     #x, t = conv(i, batchsize)
@@ -79,3 +78,5 @@ for n in range(20):
     t = Variable(y_test)
     loss = model(x, t)
     print n, loss.data
+
+print(starttime - time.time())
