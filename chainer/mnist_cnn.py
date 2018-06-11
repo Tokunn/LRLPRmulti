@@ -26,17 +26,34 @@ x_test = convorder(x_test)
 class Model(Chain):
     def __init__(self):
         super(Model, self).__init__(
-                conv1 = L.Convolution2D(3, 20, 5),
-                conv2 = L.Convolution2D(20, 50, 5),
-                fc1 = L.Linear(800, 500),
-                fc2 = L.Linear(500, class_count),
+                conv1 = L.Convolution2D(3, 32, 5),
+                conv2 = L.Convolution2D(32, 64, 5),
+                fc1 = L.Linear(4*4*64, 1024), # 4 * 4 * 32
+                fc2 = L.Linear(1024, class_count),
         )
     def __call__(self, x):
-        cv1 = self.conv1(x)
+
+        cv1 = self.conv1(x) # 26 
         relu = F.relu(cv1)
+
         h = F.max_pooling_2d(relu, 2)
         h = F.max_pooling_2d(F.relu(self.conv2(h)), 2)
         h = F.dropout(F.relu(self.fc1(h)), train=(x_train, y_train))
+        #h = F.dropout(F.relu(self.fc1(h)), train=(x_train, y_train))
+
+        #h = F.max_pooling_2d(relu, 2) # 12
+        #cv2 = self.conv2(relu) # 24
+        #relu = F.relu(cv2)
+        #h = F.max_pooling_2d(relu, 2) # 12
+
+        #h = self.fc1(h)
+        #h = F.dropout(h)
+        #relu = F.relu(h)
+        #h = F.dropout(h, train=(x_train, y_train))
+        #h = self.fc2(h)
+
+        #h = F.max_pooling_2d(F.relu(self.conv2(h)), 2)
+        #h = F.dropout(F.relu(self.fc1(h)), train=(x_train, y_train))
         return self.fc2(h)
 
 
@@ -79,4 +96,4 @@ for n in range(400):
     loss = model(x, t)
     print n, loss.data
 
-print(starttime - time.time())
+print(time.time() - starttime)
