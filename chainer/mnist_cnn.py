@@ -73,7 +73,7 @@ def conv(batch, batchsize):
     return Variable(np.array(x)), Variable(np.array(t))
 
 starttime = time.time()
-for n in range(400):
+for n in range(20):
     #for i in chainer.iterators.SerialIterator(train, batchsize, repeat=False):
     #    x, t = conv(i, batchsize)
 

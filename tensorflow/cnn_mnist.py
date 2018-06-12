@@ -135,7 +135,7 @@ def main(unused_argv):
       #y=train_labels,
       y=y_train,
       #batch_size=1,
-      num_epochs=400,
+      num_epochs=20,
       shuffle=True)
   mnist_classifier.train(
       input_fn=train_input_fn,

@@ -79,7 +79,7 @@ if os.path.exists(filename):
 print(datetime.datetime.now())
 start_time = time.time()
 #history = model.fit(x_train, y_train, batch_size=5, epochs=20,
-history = model.fit(x_train, y_train, epochs=400,
+history = model.fit(x_train, y_train, epochs=20,
                     validation_data = (x_test, y_test), verbose=1)
 print(datetime.datetime.now())
 print(time.time() - start_time)
